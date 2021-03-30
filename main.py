@@ -1,6 +1,7 @@
+import math
 import random
 import numpy as np
-import math
+from tqdm import tqdm
 
 def random_gen(num_node, num_edge):
     num_node = int(num_node)
@@ -8,7 +9,7 @@ def random_gen(num_node, num_edge):
     src = []
     dst = []
     edges = set()
-    for index, _ in enumerate(range(num_edge)):
+    for _ in tqdm(range(num_edge)):
         x = random.randint(0, num_node)
         y = random.randint(0, num_node)
         if (x, y) in edges:
@@ -36,7 +37,7 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
     dst = []
     edges = set()
 
-    for index, _ in enumerate(range(num_edge)):
+    for _ in tqdm(range(num_edge)):
         x = 0
         y = 0
         for i in range(1, M+1):
@@ -61,3 +62,6 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
         dst.append(y)
     return src, dst
 
+a, b = kronecker_gen(1000, 1000)
+print(len(a))
+print(len(b))
