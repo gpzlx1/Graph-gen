@@ -1,2 +1,2 @@
 # Graph-gen
-Use `kronecker product` or `random edges` to generate graph.
+Use `kronecker product` and `random edges` to generate graph.
