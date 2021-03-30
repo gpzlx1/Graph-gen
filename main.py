@@ -5,11 +5,17 @@ import math
 def random_gen(num_node, num_edge):
     num_node = int(num_node)
     num_edge = int(num_edge)
-    src = [None] * num_node
-    dst = [None] * num_node
+    src = []
+    dst = []
+    edges = set()
     for index, _ in enumerate(range(num_edge)):
-        src[index] = random.randint(0, num_node)
-        dst[index] = random.randint(0, num_node)
+        x = random.randint(0, num_node)
+        y = random.randint(0, num_node)
+        if (x, y) in edges:
+            continue
+        edges.add((x,y))
+        src.append(x)
+        dst.append(y)
     return src, dst
 
 #Kronecker Prob kernel KPK = []
@@ -26,8 +32,9 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
     num_node = math.ceil(math.log2(num_node)) ** 2
     M = int(math.log2(num_node))
 
-    src = [None] * num_edge
-    dst = [None] * num_edge
+    src = []
+    dst = []
+    edges = set()
 
     for index, _ in enumerate(range(num_edge)):
         x = 0
@@ -47,7 +54,10 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
             else:
                 x = x + 1 * base
                 y = y + 1 * base
-        src[index] = x
-        dst[index] = y
+        if (x, y) in edges:
+            continue
+        edges.add((x,y))
+        src.append(x)
+        dst.append(y)
     return src, dst
 
