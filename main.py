@@ -30,7 +30,7 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
         pre_sum_prob_kernel.append(pre_sum_prob_kernel[index] + prob)
     pre_sum_prob_kernel = [ i / np.sum(prob_kernel) for i in pre_sum_prob_kernel]
 
-    num_node = math.ceil(math.log2(num_node)) ** 2
+    num_node = 2 ** math.ceil(math.log2(num_node))
     M = int(math.log2(num_node))
 
     src = []
@@ -56,12 +56,9 @@ def kronecker_gen(num_node, num_edge, prob_kernel = [0.99, 0.54, 0.49, 0.13]):
                 x = x + 1 * base
                 y = y + 1 * base
         if (x, y) in edges:
+            #print(x,y)
             continue
         edges.add((x,y))
         src.append(x)
         dst.append(y)
     return src, dst
-
-a, b = kronecker_gen(1000, 1000)
-print(len(a))
-print(len(b))
