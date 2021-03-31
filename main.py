@@ -73,7 +73,7 @@ def Gorder(edges, order = 'out'):
     q = queue.Queue()
     visited = []
 
-    for src in unvisited:
+    for src in tqdm(unvisited):
         if src in visited:
             continue
         q.put(src)
@@ -94,6 +94,3 @@ def Gorder(edges, order = 'out'):
     for src, dst in edges:
         order_edges.add((map_dict.get(src, src), map_dict.get(dst, dst)))
     return order_edges
-    
-
-
